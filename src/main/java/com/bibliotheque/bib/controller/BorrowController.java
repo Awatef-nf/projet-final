@@ -35,5 +35,23 @@ public class BorrowController {
             return borrowServices.createNewBorrow( b);
         }
 
+        @GetMapping("/inprogress")
+        public List<Borrow> borrowInProgress()
+        {
+            return borrowServices.borrowInProgress();
+        }
+
+        @GetMapping("/islate")
+        public List<Borrow> borrowIsLate()
+        {
+            return borrowServices.borrowIsLate();
+        }
+
+        @GetMapping("/member/{id}")
+        public List<Borrow> borrowOfMember(@PathVariable Integer id)
+        {
+            return  borrowServices.BorrowOfMember(id);
+        }
+
     }
 
