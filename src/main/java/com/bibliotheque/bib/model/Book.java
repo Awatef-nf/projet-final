@@ -39,9 +39,6 @@ public class Book {
     @Column(name="copies_available")
     private Integer copies_available;
 
-
-
-
     public Book() {
     }
 

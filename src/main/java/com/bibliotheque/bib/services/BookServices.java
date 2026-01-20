@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class BookServices {
@@ -51,5 +51,14 @@ public class BookServices {
 
     }
 
-
+    public List<Book> getByCategories(String categorie) {
+        List<Book>  bookCategorie = new ArrayList<>();
+        List<Book> books = bookRepository.findAll();
+        for (Book b : books) {
+            if (b.getCategories().equals(categorie)) {
+                bookCategorie.add(b);
+            }
+        }
+        return bookCategorie;
+    }
 }
