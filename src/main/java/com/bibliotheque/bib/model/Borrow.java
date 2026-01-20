@@ -7,9 +7,10 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "borrow")
+
 public class Borrow {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne
@@ -31,6 +32,15 @@ public class Borrow {
 
 
     public Borrow() {
+    }
+
+
+    public Borrow(Members members, Book book, LocalDate borrow_date, LocalDate expected_return_date, LocalDate effective_return_date) {
+        this.members = members;
+        this.book = book;
+        this.borrow_date = borrow_date;
+        this.expected_return_date = expected_return_date;
+        this.effective_return_date = effective_return_date;
     }
 
     public Borrow(Integer id, LocalDate borrow_date, LocalDate expected_return_date, LocalDate effective_return_date) {

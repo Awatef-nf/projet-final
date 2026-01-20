@@ -1,10 +1,16 @@
 package com.bibliotheque.bib.controller;
 
 
+import com.bibliotheque.bib.dto.BorrowCreateDto;
+import com.bibliotheque.bib.model.Book;
 import com.bibliotheque.bib.model.Borrow;
+import com.bibliotheque.bib.model.Members;
+import com.bibliotheque.bib.services.BookServices;
 import com.bibliotheque.bib.services.BorrowServices;
+import com.bibliotheque.bib.services.MembersServices;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 @CrossOrigin
 @RestController
@@ -12,6 +18,7 @@ import java.util.List;
 public class BorrowController {
 
         private BorrowServices borrowServices;
+
 
     public BorrowController(BorrowServices borrowServices) {
         this.borrowServices = borrowServices;
@@ -30,9 +37,9 @@ public class BorrowController {
 
 
         @PostMapping("/create")
-        public Borrow createBorrow(@RequestBody Borrow b)
+        public Borrow createBorrow(@RequestBody BorrowCreateDto dto)
         {
-            return borrowServices.createNewBorrow( b);
+            return borrowServices.createNewBorrow(dto);
         }
 
         @GetMapping("/inprogress")
