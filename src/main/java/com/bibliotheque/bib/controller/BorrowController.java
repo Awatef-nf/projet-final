@@ -1,16 +1,11 @@
 package com.bibliotheque.bib.controller;
 
 
-import com.bibliotheque.bib.dto.BorrowCreateDto;
-import com.bibliotheque.bib.model.Book;
+import com.bibliotheque.bib.dto.BorrowDto;
 import com.bibliotheque.bib.model.Borrow;
-import com.bibliotheque.bib.model.Members;
-import com.bibliotheque.bib.services.BookServices;
 import com.bibliotheque.bib.services.BorrowServices;
-import com.bibliotheque.bib.services.MembersServices;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 @CrossOrigin
 @RestController
@@ -25,7 +20,7 @@ public class BorrowController {
     }
 
         @GetMapping("/all")
-        public List<Borrow> getAll() {
+        public List<BorrowDto> getAll() {
             return  borrowServices.getAllBorrow();
         }
 
@@ -37,13 +32,13 @@ public class BorrowController {
 
 
         @PostMapping("/create")
-        public Borrow createBorrow(@RequestBody BorrowCreateDto dto)
+        public Borrow createBorrow(@RequestBody BorrowDto dto)
         {
             return borrowServices.createNewBorrow(dto);
         }
 
         @GetMapping("/inprogress")
-        public List<Borrow> borrowInProgress()
+        public List<BorrowDto> borrowInProgress()
         {
             return borrowServices.borrowInProgress();
         }
@@ -60,5 +55,10 @@ public class BorrowController {
             return  borrowServices.BorrowOfMember(id);
         }
 
+        @PostMapping("/{id}/tomodify")
+        public Borrow ModifyBorrow(@RequestBody BorrowDto dto, @PathVariable Integer id)
+        {
+            return  borrowServices.modifyBorrow(dto,id);
+        }
     }
 

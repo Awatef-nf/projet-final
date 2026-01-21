@@ -2,7 +2,7 @@ package com.bibliotheque.bib.dto;
 
 import java.time.LocalDate;
 
-public class BorrowCreateDto {
+public class BorrowDto {
 
     private Integer book_id;
     private Integer members_id;
@@ -11,6 +11,14 @@ public class BorrowCreateDto {
     private LocalDate expected_return_date;
 
     private LocalDate effective_return_date;
+
+    public BorrowDto(Integer book_id, Integer members_id, LocalDate borrow_date, LocalDate expected_return_date, LocalDate effective_return_date) {
+        this.book_id = book_id;
+        this.members_id = members_id;
+        this.borrow_date = borrow_date;
+        this.expected_return_date = expected_return_date;
+        this.effective_return_date = effective_return_date;
+    }
 
     public Integer getBook_id() {
         return book_id;
