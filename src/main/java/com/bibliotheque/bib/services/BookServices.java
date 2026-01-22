@@ -46,6 +46,20 @@ public class BookServices {
                 );
     }
 
+    public List<Book> getBookByTitle( String title){
+        List<Book> books = bookRepository.findAll();
+        List<Book> booksearched = new ArrayList<>();
+
+        for(Book b : books)
+        {
+            if(b.getTitle().toLowerCase().equals(title)) {
+            booksearched.add(b);
+        }
+        }
+        return booksearched;
+    }
+
+
     public Book createNewBook(Book b){
        return bookRepository.save(b);
 

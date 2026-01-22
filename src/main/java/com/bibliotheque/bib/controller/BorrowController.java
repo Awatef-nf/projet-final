@@ -2,6 +2,7 @@ package com.bibliotheque.bib.controller;
 
 
 import com.bibliotheque.bib.dto.BorrowDto;
+import com.bibliotheque.bib.dto.IdentityMemberByBorrow;
 import com.bibliotheque.bib.model.Borrow;
 import com.bibliotheque.bib.services.BorrowServices;
 import org.springframework.web.bind.annotation.*;
@@ -44,13 +45,13 @@ public class BorrowController {
         }
 
         @GetMapping("/islate")
-        public List<Borrow> borrowIsLate()
+        public List<BorrowDto> borrowIsLate()
         {
             return borrowServices.borrowIsLate();
         }
 
         @GetMapping("/member/{id}")
-        public List<Borrow> borrowOfMember(@PathVariable Integer id)
+        public IdentityMemberByBorrow borrowOfMember(@PathVariable Integer id)
         {
             return  borrowServices.BorrowOfMember(id);
         }

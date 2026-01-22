@@ -46,5 +46,10 @@ public class BookController {
         return bookServices.getByCategories(categories);
     }
 
+    @GetMapping("/title/{title}")
+    public  List<Book> getByTtitle(@PathVariable String title)
+    {
+        return bookServices.getBookByTitle(title);
+    }
 
 }

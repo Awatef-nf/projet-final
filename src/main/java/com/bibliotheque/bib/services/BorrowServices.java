@@ -1,6 +1,8 @@
 package com.bibliotheque.bib.services;
 import com.bibliotheque.bib.Repository.BorrowRepository;
+import com.bibliotheque.bib.Repository.MembersRepository;
 import com.bibliotheque.bib.dto.BorrowDto;
+import com.bibliotheque.bib.dto.IdentityMemberByBorrow;
 import com.bibliotheque.bib.model.Book;
 import com.bibliotheque.bib.model.Borrow;
 import com.bibliotheque.bib.model.Members;
@@ -20,6 +22,7 @@ public class BorrowServices {
      private BookServices bookServices;
      @Autowired
      private MembersServices membersServices;
+
 
     public BorrowServices(BorrowRepository borrowRepository) {
         this.borrowRepository = borrowRepository;
@@ -67,31 +70,33 @@ public class BorrowServices {
         return borrowInProgress;
     }
 
-    public List<Borrow> borrowIsLate()
+    public List<BorrowDto> borrowIsLate()
     {
-        List<Borrow> borrowIsLate= new ArrayList<>();
+        List<BorrowDto> borrowIsLate= new ArrayList<>();
         List<Borrow> borrows = borrowRepository.findAll();
         for(Borrow b : borrows)
         {
             if((b.getExpected_return_date().isBefore(LocalDate.now()))&&(b.getEffective_return_date()==null))
             {
-                borrowIsLate.add(b);
+                borrowIsLate.add(new BorrowDto(b.getBook().getId(),b.getMembers().getId(),b.getBorrow_date(),b.getExpected_return_date(),b.getEffective_return_date()));
             }
         }return borrowIsLate;
     }
 
-    public List<Borrow> BorrowOfMember(Integer id)
+    public IdentityMemberByBorrow BorrowOfMember(Integer id)
     {
-        List<Borrow> borrowOfMember= new ArrayList<>();
+
         List<Borrow> borrows = borrowRepository.findAll();
+        List<BorrowDto> memberBorrow = new ArrayList<>();
+        Members members = membersServices.getMemberById(id);;
         for(Borrow b : borrows)
         {
             if(b.getMembers().getId().equals(id))
             {
-                borrowOfMember.add(b);
+                memberBorrow.add(new BorrowDto(b.getBook().getId(),b.getMembers().getId(),b.getBorrow_date(),b.getExpected_return_date(),b.getEffective_return_date()));;
             }
 
-        } return borrowOfMember;
+        } return new IdentityMemberByBorrow(memberBorrow,members.getName_(),members.getFirst_name());
     }
 
     public Borrow modifyBorrow(BorrowDto dto, Integer id) {
