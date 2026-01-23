@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+      <script src="script.js" defer></script>
+      <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<header>
+    <h1> bibiliotheque </h1>
+    <input id="search" type ="textarea" placeholder="titre du livre"></input>
+    <button id="button-search">Chercher</button>
+
+    <input id="emprunt" type ="textarea" placeholder="l'identifiant du membre"></input>
+    <button id="emprunt-search">Chercher les emprunts d'un membre</button>
+
+
+    <select id="filtrer-categorie">
+
+    <option id="categorie">Choisir une categorie</option>
+    <option value="Art" id="Art">Art</option>
+    <option value="Economie" id="Economie">Economie</option>
+    <option value="Aventure" id="Aventure">Aventure</option>
+    <option value="Cuisine"id="Cuisine">Cuisine</option>
+    <option value="Fantasy" id="Fantasy">Fantasy</option>
+    <option value="Histoire" id="Histoire">Histoire</option>
+    <option value="Informatique" id="Informatique">Informatique</option>
+    <option value="Littérature" id="Littérature">Littérature</option>
+    <option value="Science" id="Science">Science</option>
+
+    </select>
+    <button id="filtrer">Filter</button>
+    
+
+    <div id="button-principaux">
+    <button id="button-header1">les livres</button>
+    <button id="button-header2">Les membres</button>
+    <button id="button-header3">les emprunts en cours</button>
+    <button id="button-late">les emprunts en retard</button></div>
+
+
+</header>
+<main>
+    <div id="contenu">
+    </div>
+</main>
+
+
+</body>
+</html>
