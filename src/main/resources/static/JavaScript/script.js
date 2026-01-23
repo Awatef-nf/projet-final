@@ -7,43 +7,47 @@
      let divcontenu = document.getElementById("contenu");
      divcontenu.appendChild(tableBook);
      //l id du livre
-     let id = document.createElement("tr");
-     id.classList.add("book-id");
-     id.textContent="Identifiant: "+ book.Id;
-     tableBook.appendChild(id);
-    
+     let id_tr = document.createElement("tr");
+     let id_td = document.createElement("td")
+     id_td.textContent="Identifiant: "+ book.Id;
+     id_tr.appendChild(id_td)
+     tableBook.appendChild(id_tr);
+
     //le titre du livre
     let title = document.createElement("tr");
-    title.classList.add("titre");
-    title.textContent="Titre: "+ book.title;
+    let td_title = document.createElement("td");
+    td_title.textContent="Titre: "+ book.title;
+    title.appendChild(td_title);
     tableBook.appendChild(title);
    
     //l'auteur du livre
     let author = document.createElement("tr");
-    author.classList.add("auteur");
-    author.textContent="Auteur: "+ book.author;
+    let td_author = document.createElement("td");
+    td_author.textContent="Auteur: "+ book.author;
+    author.appendChild(td_author);
     tableBook.appendChild(author);
 
     // l'Isbn du livre
     let isbn = document.createElement("tr");
-    isbn.classList.add("isbn");
-    isbn.textContent="ISBN: "+ book.isbn;
+     let td_isbn = document.createElement("td");
+    td_isbn.textContent="ISBN: "+ book.isbn;
+    isbn.appendChild(td_isbn)
     tableBook.appendChild(isbn);
 
     //l'annee de publication du livre
     let year_published = document.createElement("tr");
-    year_published.classList.add("annee");
-    year_published.textContent="Année de publication: "+ book.year_published;
+    let td_year_published = document.createElement("td");
+    td_year_published.textContent="Année de publication: "+ book.year_published;
+    year_published.appendChild(td_year_published);
     tableBook.appendChild(year_published );
     
     //la categorie du livre
     let categorie = document.createElement("tr");
-    categorie.classList.add("categorie");
-    categorie.textContent="Genre: "+ book.categories;
+    let td_categorie = document.createElement("td");
+    td_categorie.textContent="Genre: "+ book.categories;
+    categorie.appendChild(td_categorie);
     tableBook.appendChild(categorie );
-    //ajouter une ligne de séparation entre les livres
-    let ligne_separation = document.createElement("hr");
-    divcontenu.appendChild(ligne_separation);      
+
  }
 
 // fetch des  livres 
@@ -172,9 +176,7 @@ function displayMembers(members){
         active_.classList.add("active_");
         active_.textContent="Statut: "+ members.active_ ;
         tableMembers.appendChild(active_); 
-       //ajouter une ligne de séparation entre les livres
-       let ligne_separation = document.createElement("hr");
-       divcontenu.appendChild(ligne_separation);      
+     
 }
 
 // fetch des membres
@@ -206,7 +208,8 @@ fetch("http://localhost:8080/members/all")
 
 //afficher tt les emprunts  
 
-function displayBorrow(borrow){
+function displayBorrow(borrow,late){
+    
      //la table qui contient tous les emprunts  
      let tableBorrow    = document.createElement("table");
      tableBorrow.classList.add("tableBorrow");
@@ -242,11 +245,28 @@ function displayBorrow(borrow){
         effective_return_date.classList.add("effective_return_date"); 
         effective_return_date.textContent="Date de retour effective: "+ borrow.effective_return_date;
         tableBorrow.appendChild(effective_return_date); 
+        //nombre de jours en retard
+        if(late)
+        {
+         let td = document.createElement("tr");
+        td.classList.add("tr-dayOfLate");
+
+        let tr =document.createElement("td");
+        tr.classList.add("td-dayOfLate")
+
+       let date1= new Date();
+       let expected_date= new Date(borrow.expected_return_date).getTime();
+       const msPerDay =1000*60*60*24;
+       let numberDayOf = Math.floor((date1-expected_date)/msPerDay);
+       
+       tr.textContent="nombre de jour en retard: "+numberDayOf;
+       td.appendChild(tr);
+       tableBorrow.appendChild(td);
+        }
+
+
         
-        //ajouter une ligne de séparation entre les livres
-       let ligne_separation = document.createElement("hr");
-       ligne_separation.classList.add("ligne-separation");
-       divcontenu.appendChild(ligne_separation);      
+       
 }
 
 
@@ -277,7 +297,7 @@ document.getElementById("button-header3").addEventListener('click', function () 
     console.log(json)
     for(let borrow  of json){
     
-      displayBorrow(borrow)
+      displayBorrow(borrow,false)
      
     }
 })
@@ -289,45 +309,14 @@ document.getElementById("button-header3").addEventListener('click', function () 
 })
 
 
-
-//calcule du nombre de jour de retards
-
-function daysOfLate(borrow)
-{       let tableBorrow  = document.createElement("table");
-        let divcontenu = document.getElementById("contenu");
-        divcontenu.appendChild(tableBorrow);
-    
-    
-       let tr = document.createElement("tr");
-       tr.classList.add("tr-dayOfLate");
-       let td =document.createElement("td");
-       td.classList.add("td-dayOfLate")
-
-       let date1= new Date();
-       let expected_date= new Date(borrow.expected_return_date).getTime();
-       const msPerDay =1000*60*60*24;
-       let numberDayOf = Math.floor((date1-expected_date)/msPerDay);
-       
-       td.textContent="nombre de jour en retard: "+numberDayOf;
-       tr.appendChild(td);
-       tableBorrow.appendChild(tr);
-   
-}
-
-
 //afficher tt les emprunts en retard
 
 
 document.getElementById("button-late").addEventListener('click', function () {
-//une entete de la colonne
+
         let tableBorrow    = document.createElement("table");
         let divcontenu = document.getElementById("contenu");
         divcontenu.appendChild(tableBorrow);
-
-        let entete = document.createElement("th");
-        entete.classList.add("entete")
-        entete.textContent="les emprunts en retard";
-        tableBorrow.appendChild(entete);
 
 fetch("http://localhost:8080/borrow/islate")
 .then(response =>{
@@ -340,8 +329,8 @@ fetch("http://localhost:8080/borrow/islate")
     console.log(json)
     for(let borrow  of json){
       
-      daysOfLate(borrow);
-      displayBorrow(borrow);  
+      
+      displayBorrow(borrow,true);  
       
      
     }
