@@ -5,48 +5,54 @@
      let tableBook = document.createElement("table");
      tableBook.setAttribute("id","tablebook");
      let divcontenu = document.getElementById("contenu");
-     divcontenu.appendChild(tableBook);
+     
+
+    //les tr de la table
+    let tr1 = document.createElement("tr");
+
      //l id du livre
-     let id_tr = document.createElement("tr");
-     let id_td = document.createElement("td")
+     let id_td= document.createElement("td");
      id_td.textContent="Identifiant: "+ book.Id;
-     id_tr.appendChild(id_td)
-     tableBook.appendChild(id_tr);
+     tr1.appendChild(id_td)
+    
 
     //le titre du livre
-    let title = document.createElement("tr");
+    
     let td_title = document.createElement("td");
     td_title.textContent="Titre: "+ book.title;
-    title.appendChild(td_title);
-    tableBook.appendChild(title);
+    tr1.appendChild(td_title);
+   
    
     //l'auteur du livre
-    let author = document.createElement("tr");
+    
     let td_author = document.createElement("td");
     td_author.textContent="Auteur: "+ book.author;
-    author.appendChild(td_author);
-    tableBook.appendChild(author);
+    tr1.appendChild(td_author);
+  
 
     // l'Isbn du livre
-    let isbn = document.createElement("tr");
+   
      let td_isbn = document.createElement("td");
     td_isbn.textContent="ISBN: "+ book.isbn;
-    isbn.appendChild(td_isbn)
-    tableBook.appendChild(isbn);
+    tr1.appendChild(td_isbn)
+   
 
     //l'annee de publication du livre
-    let year_published = document.createElement("tr");
+   
     let td_year_published = document.createElement("td");
     td_year_published.textContent="Année de publication: "+ book.year_published;
-    year_published.appendChild(td_year_published);
-    tableBook.appendChild(year_published );
+    tr1.appendChild(td_year_published);
+    
     
     //la categorie du livre
-    let categorie = document.createElement("tr");
+    
     let td_categorie = document.createElement("td");
     td_categorie.textContent="Genre: "+ book.categories;
-    categorie.appendChild(td_categorie);
-    tableBook.appendChild(categorie );
+    tr1.appendChild(td_categorie);
+
+    
+     tableBook.appendChild(tr1);
+     divcontenu.appendChild(tableBook);
 
  }
 
