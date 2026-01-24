@@ -54,7 +54,7 @@ header h1 {
 }
 
 #allsearch button:hover {
-    background-color: #2f1240;
+    /*background-color: #2f1240;*/
     transform: scale(1.05);
 }
 
@@ -79,7 +79,7 @@ header h1 {
 }
 
 #button-principaux button:hover {
-    background-color: #8f6be4;
+    /*background-color: #8f6be4;*/
     transform: scale(1.05);
 }
 
@@ -95,45 +95,44 @@ header h1 {
 /*========================= TABLES =========================*/
 table {
     display: flex;
+    flex-direction: column;
     border-collapse: collapse;
     margin-bottom: 15px;
     background-color: #ffffff;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     border-radius: 8px;
     overflow: hidden;
-    gap: 60px;
+    table-layout: fixed;
 }
 
-table tr {
+   
 
+tr{
+    margin: auto;
 }
 
-table tr:last-child {
-    border-bottom: none;
-}
 
 table td {
-    padding: 10px 15px;
+    padding: 0px 39px;
     font-size: 14px;
     color: #333;
+   
+    
 }
 
 table th {
-    background-color: #2c3e50;
+    background-color: rgb(63, 44, 140);
     color: white;
-    padding: 10px 15px;
+    padding: 1px 48px;
     text-align: left;
+   
+  vertical-align: middle; /* même niveau vertical */
 }
 
 /* Hover sur ligne */
 table tr:hover {
     background-color: #f2f2f2;
 }
-
-
-
-
-
 
 /*========================= RESPONSIVE =========================*/
 @media (max-width: 768px) {

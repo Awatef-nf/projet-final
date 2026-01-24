@@ -9,49 +9,71 @@
 
     //les tr de la table
     let tr1 = document.createElement("tr");
+    let tr2= document.createElement("tr"); 
 
      //l id du livre
+     let id_th= document.createElement("th");
      let id_td= document.createElement("td");
-     id_td.textContent="Identifiant: "+ book.Id;
-     tr1.appendChild(id_td)
+     id_th.textContent="Identifiant";
+     id_td.textContent=book.Id;
+    
+     tr1.appendChild(id_th);
+      tr2.appendChild(id_td);
     
 
     //le titre du livre
     
-    let td_title = document.createElement("td");
-    td_title.textContent="Titre: "+ book.title;
-    tr1.appendChild(td_title);
+    let th_title = document.createElement("th");
+    th_title.textContent="Titre";
+    let td_title = document.createElement("td")
+    td_title.textContent=book.title;
+    tr1.appendChild(th_title);
+    tr2.appendChild(td_title);
    
    
     //l'auteur du livre
     
+    let th_author = document.createElement("th");
+    th_author.textContent=" Auteur" ;
     let td_author = document.createElement("td");
-    td_author.textContent="Auteur: "+ book.author;
-    tr1.appendChild(td_author);
+    td_author.textContent=book.author;
+    tr1.appendChild(th_author); 
+    tr2.appendChild(td_author);
   
 
     // l'Isbn du livre
    
-     let td_isbn = document.createElement("td");
-    td_isbn.textContent="ISBN: "+ book.isbn;
-    tr1.appendChild(td_isbn)
+    let th_isbn = document.createElement("th");
+    th_isbn.textContent="Isbn ";
+    let td_isbn = document.createElement("td");
+    td_isbn.textContent=book.isbn;
+    tr1.appendChild(th_isbn);
+    tr2.appendChild(td_isbn);
+    
    
 
     //l'annee de publication du livre
    
+    let th_year_published = document.createElement("th");
+    th_year_published.textContent="Année de publication ";
     let td_year_published = document.createElement("td");
-    td_year_published.textContent="Année de publication: "+ book.year_published;
-    tr1.appendChild(td_year_published);
+    td_year_published.textContent=book.year_published;
+    tr1.appendChild(th_year_published); 
+    tr2.appendChild(td_year_published);
     
     
     //la categorie du livre
     
+    let th_categorie = document.createElement("th");
+    th_categorie.textContent="Genre ";
     let td_categorie = document.createElement("td");
-    td_categorie.textContent="Genre: "+ book.categories;
-    tr1.appendChild(td_categorie);
+    td_categorie.textContent=book.categories;
+    tr1.appendChild(th_categorie);
+    tr2.appendChild(td_categorie);
 
     
      tableBook.appendChild(tr1);
+     tableBook.appendChild(tr2);
      divcontenu.appendChild(tableBook);
 
  }
